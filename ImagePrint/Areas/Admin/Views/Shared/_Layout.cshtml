@@ -18,34 +18,32 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a href='@Url.Action("Index","Home", new { area = "" })'>
-                    <span class="btn btn-xs btn-primary" style="color:aqua">
-                        <span class="navbar-brand">To Homepage !</span>
+                    <span class="btn-xs btn-primary navbar-brand">
+                        <b>To Homepage !</b>
                     </span>
                 </a>
                 <a href='@Url.Action("Login","LoginCustomer", new { area = "" })'>
-                    <span class="btn btn-xs btn-info" style="color:aqua">
-                        <span class="navbar-brand">Print Image</span>
+                    <span class="btn-xs btn-info navbar-brand">
+                        <b>Print Image</b>
                     </span>
                 </a>
             </div>
-            <div class="navbar-collapse collapse">
+            <div class="navbar-collapse collapse float-right">
                 @if (Session["admin"] != null)
                 {
                     Member admin = (Member)Session["admin"];
                     <ul class="nav navbar-nav sign-in-out">
                         <li style="color:aqua"><a class="nav-item" href="#"><i class="fa-unlock-alt" aria-hidden="true"></i>Wellcome, @admin.UserM</a></li>
                         <li><a class="nav-item" href="@Url.Action("Index", "Customers")"> Manage Customers Info</a></li>
-                        <li><a class="nav-item text-danger" href='@Url.Action("LogOut","AdminLogin")'>Sign Out</a></li>
+                        <li><a class="nav-item text-danger btn-danger" href='@Url.Action("LogOut","AdminLogin")'>Sign Out</a></li>
                     </ul>
 
                 }
                 else
                 {
-                    <a href='@Url.Action("Index","AdminLogin")'>
-                        <ul class="nav navbar-nav sign-in-out">
-                            <li class="btn btn-success">Admin Sign In</li>
-                        </ul>
-                    </a>
+                    <ul class="nav navbar-nav sign-in-out">
+                        <li class="nav-item btn-success"><a href='@Url.Action("Index","AdminLogin")'>Admin Sign In</a></li>
+                    </ul>
                 }
             </div>
         </div>
