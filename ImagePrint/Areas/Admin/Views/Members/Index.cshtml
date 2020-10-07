@@ -1,0 +1,39 @@
+﻿@model IEnumerable<ImagePrint.Models.Member>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>List of admin accounts</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-info p-4" })
+</p>
+<table class="table" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); padding:20px; color: white;">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserM)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PassM)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserM)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PassM)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-success p-4" })
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger p-4" })
+            </td>
+        </tr>
+    }
+
+</table>

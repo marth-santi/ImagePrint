@@ -1,0 +1,39 @@
+﻿@model ImagePrint.Models.Member
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Admin Login</h2>
+
+
+@using (Html.BeginForm("Index", "AdminLogin"))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal" style="color:white">
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserM, "Admin Username", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.UserM, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UserM, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PassM, "Admin Password", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.PasswordFor(model => model.PassM, new { @class = "form-control", @type = "password" })
+                @Html.ValidationMessageFor(model => model.PassM, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Login" class="btn btn-default" />
+                @Html.ValidationSummary(true, null, new { @class = "alert alert-danger my-notice" })
+            </div>
+        </div>
+    </div>
+}

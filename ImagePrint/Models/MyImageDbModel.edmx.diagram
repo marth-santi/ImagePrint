@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="186711d57b0f4c2393b28bb170e3f917" Name="Diagram1">
+        <EntityTypeShape EntityType="MyImageDBModel.Customer" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyImageDBModel.Image" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyImageDBModel.Member" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyImageDBModel.OrderDetail" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyImageDBModel.Order" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyImageDBModel.Size" Width="1.5" PointX="3" PointY="7.125" IsExpanded="true" />
+        <AssociationConnector Association="MyImageDBModel.FK__Orders__CusId__145C0A3F" ManuallyRouted="false" />
+        <AssociationConnector Association="MyImageDBModel.FK__OrderDeta__Image__1A14E395" ManuallyRouted="false" />
+        <AssociationConnector Association="MyImageDBModel.FK__OrderDeta__Order__1920BF5C" ManuallyRouted="false" />
+        <AssociationConnector Association="MyImageDBModel.FK_OrderDetails_Sizes" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
