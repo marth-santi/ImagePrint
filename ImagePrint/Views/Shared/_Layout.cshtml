@@ -60,8 +60,61 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        <footer id="footer" class="footer-1">
+            <div class="main-footer widgets-dark typo-light">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-3">
+                            <div class="widget subscribe no-box">
+                                <h5 class="widget-title">MyImage Application<span></span></h5>
+                                <p>About the company, save beautiful moments about you. </p>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-3">
+                            <div class="widget no-box">
+                                <h5 class="widget-title">Quick Links<span></span></h5>
+                                <ul class="thumbnail-widget">
+                                    <li>
+                                        <div class="thumb-content"><a href='@Url.Action("SignUp","LoginCustomer")'>Sign Up</a></div>
+                                    </li>
+                                    <li>
+                                        <div class="thumb-content"><a href='@Url.Action("Login","LoginCustomer")'>Sign In</a></div>
+                                    </li>
+                                    <li>
+                                        <div class="thumb-content"><a href='@Url.Action("Index","GoToPrint")'>Go to Print</a></div>
+                                    </li>
+                                    <li>
+                                        <div class="thumb-content"><a href='@Url.Action("About","Home")'>About</a></div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-3">
+                            <div class="widget no-box">
+                                <h5 class="widget-title">Get Started<span></span></h5>
+                                <p>Print and design images according to customers' requirements.</p>
+                                <a href='@Url.Action("SignUp","LoginCustomer")' class="btn my-btn">Sign Up Now</a>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-3">
+
+                            <div class="widget no-box">
+                                <h5 class="widget-title">Contact Us<span></span></h5>
+
+                                <p><a href="mailto:nguyentam.angel@gmail.com" title="glorythemes">nguyentam.angel@gmail.com</a></p>
+                                <p><a href="mailto:nguyentam.angel@gmail.com" title="glorythemes">nguyentam.angel@gmail.com</a></p>
+                                <ul class="social-footer2">
+                                    <li class=""><a title="youtube" target="_blank" href="https://www.youtube.com/"><i class="fab fa-youtube" style="color: red;"></i></a></li>
+                                    <li class=""><a href="https://www.facebook.com/" target="_blank" title="Facebook"><i class="fab fa-facebook" style="color: #055CAD;"></i></a></li>
+                                    <li class=""><a href="https://twitter.com" target="_blank" title="Twitter"><i class="fab fa-twitter-square" style="color: #03F3FC;"></i></a></li>
+                                    <li class=""><a title="instagram" target="_blank" href="https://www.instagram.com/"><i class="fab fa-instagram" style="color: #FC7203;"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p class="year">&copy; @DateTime.Now.Year - My Image Application</p>
+            </div>
         </footer>
     </div>
 

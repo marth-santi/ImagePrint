@@ -30,7 +30,9 @@ namespace ImagePrint
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
-                      "~/Content/Custom/MainLayout.css"));
+                      "~/Content/Custom/MainLayout.css",
+                      "~/Content/Custom/footer.css"
+                ));
 
             bundles.Add(new StyleBundle("~/Content/fontawesome").Include(
                     "~/Content/fontawesome-all.css"
