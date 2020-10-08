@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using ImagePrint.Models;
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -10,17 +11,50 @@
     @RenderSection("styles", required: false)
 </head>
 <body>
-    <div class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
-        @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+    <div class="navbar fixed-top navbar-expand-md navbar-dark bg-dark nav-fill">
         <button type="button" class="navbar-toggler" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="navbar-toggler-icon"></span>
         </button>
+
+        <img src="~/Content/image/logo.jpg" class="icon-header" />
+        <a href='@Url.Action("Index","GoToPrint")'>
+            <span class="btn my-btn btn-xs btn-outline-success" style="color:aqua">
+                <i class="fa fa-upload" aria-hidden="true" style="font-size:25px; margin-top:7px;"></i>
+                <span class="navbar-brand">Go to print !</span>
+            </span>
+        </a>
         <div class="navbar-collapse collapse mr-auto">
             <ul class="nav navbar-nav ">
-                <li class="nav-item nav-link">@Html.ActionLink("Home", "Index", "Home")</li>
-                <li class="nav-item nav-link">@Html.ActionLink("About", "About", "Home")</li>
-                <li class="nav-item nav-link">@Html.ActionLink("Contact", "Contact", "Home")</li>
+                <li class="nav-item nav-link text-decoration-none">@Html.ActionLink("Home", "Index", "Home")</li>
+                <li class="nav-item nav-link text-decoration-none">@Html.ActionLink("About", "About", "Home")</li>
+                <li class="nav-item nav-link text-decoration-none">@Html.ActionLink("Contact", "Contact", "Home")</li>
             </ul>
+            @if (Session["user"] != null)
+            {
+                Customer cs = (Customer)Session["user"];
+                
+                <ul class="nav navbar-nav sign-in-out ml-md-auto m-2">
+                    <li class="btn btn-danger ml-2">
+                        <a class="nav-item" href='@Url.Action("LogOut","LoginCustomer")'>Sign Out</a>
+                    </li>
+                    <li class="wellcome-text ml-2" style="color:aqua">
+                        <i class="fa fa-unlock-alt" aria-hidden="true"></i>Wellcome, @cs.UserCus
+                    </li>
+                    <li class="btn btn-facebook ml-2"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></li>
+                </ul>
+                    
+            }
+            else
+            {
+                <ul class="nav navbar-nav sign-in-out ml-md-auto m-2">
+                    <li class="btn btn-info btn-sm ml-2">
+                        <a class="nav-item nav-link" href='@Url.Action("SignUp","LoginCustomer")'>Sign Up</a>
+                    </li>
+                    <li class="btn btn-success btn-sm ml-2">
+                        <a class="nav-item nav-link" href='@Url.Action("Login","LoginCustomer")'>Sign In</a>
+                    </li>
+                </ul>
+            }
         </div>
     </div>
     <div class="container body-content">
@@ -33,6 +67,7 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/fontawesome")
     @RenderSection("scripts", required: false)
 </body>
 </html>

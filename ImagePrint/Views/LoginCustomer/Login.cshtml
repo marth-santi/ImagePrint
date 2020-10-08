@@ -1,0 +1,74 @@
+﻿@model ImagePrint.Models.Customer
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section css
+{
+    <link rel="stylesheet" type="text/css" href="~/Content/new.css">
+}
+<h2 id="text-login">Login to Print</h2>
+@using (Html.BeginForm("Login", "LoginCustomer"))
+{
+    @Html.AntiForgeryToken()
+    <div class="container row">
+        <div class="col-md-2"></div>
+        <div class="d-flex justify-content-center h-100 col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Sign In</h3>
+                    <div class="d-flex justify-content-end social_icon">
+                        <span><i class="fab fa-facebook-square"></i></span>
+                        <span><i class="fab fa-google-plus-square"></i></span>
+                        <span><i class="fab fa-twitter-square"></i></span>
+                    </div>
+                </div>
+                <div class="card-body align-items-center">
+
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <div class="input-group-prepend col-md-2">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            </div>
+
+                            <div class="col-md-10">
+
+                                @Html.EditorFor(model => model.UserCus, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.UserCus, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group-prepend col-md-2">
+                                <span class="input-group-text"><i class="fas fa-key"></i></span>
+                            </div>
+
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.PassCus, new { htmlAttributes = new { @class = "form-control", @type = "password" } })
+                                @Html.ValidationMessageFor(model => model.PassCus, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="row align-items-center remember">
+                            <input type="checkbox">Remember Me
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <span><input type="submit" value="Login" class="btn btn-success" /></span>
+                            @Html.ValidationSummary(true, null, new { @class = "alert alert-danger my-notice" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <div class="d-flex justify-content-center links">
+                        Don't have an account?<a href='@Url.Action("SignUp","LoginCustomer")'>Sign Up</a>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <a href="#">Forgot your password?</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
