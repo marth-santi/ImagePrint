@@ -29,7 +29,7 @@ namespace ImagePrint
                       "~/Content/Custom/MainLayout.css"));
 
             bundles.Add(new StyleBundle("~/Content/fontawesome").Include(
-                    "~/Content/font-awesome-all.css"
+                    "~/Content/fontawesome-all.css"
                 ));
         }
     }
