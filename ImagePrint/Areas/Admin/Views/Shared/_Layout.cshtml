@@ -9,43 +9,41 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a href='@Url.Action("Index","Home", new { area = "" })'>
-                    <span class="btn-xs btn-primary navbar-brand">
-                        <b>To Homepage !</b>
-                    </span>
-                </a>
-                <a href='@Url.Action("Login","LoginCustomer", new { area = "" })'>
-                    <span class="btn-xs btn-info navbar-brand">
-                        <b>Print Image</b>
-                    </span>
-                </a>
-            </div>
-            <div class="navbar-collapse collapse float-right">
-                @if (Session["admin"] != null)
-                {
-                    Member admin = (Member)Session["admin"];
-                    <ul class="nav navbar-nav sign-in-out">
-                        <li style="color:aqua"><a class="nav-item" href="#"><i class="fa-unlock-alt" aria-hidden="true"></i>Wellcome, @admin.UserM</a></li>
-                        <li><a class="nav-item" href="@Url.Action("Index", "Customers")"> Manage Customers Info</a></li>
-                        <li><a class="nav-item text-danger btn-danger" href='@Url.Action("LogOut","AdminLogin")'>Sign Out</a></li>
-                    </ul>
+    <div class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a href='@Url.Action("Index","Home", new { area = "" })'>
+            <span class="btn-xs btn-primary navbar-brand">
+                <b>To Homepage !</b>
+            </span>
+        </a>
+        <a href='@Url.Action("Login","LoginCustomer", new { area = "" })'>
+            <span class="btn-xs btn-info navbar-brand">
+                <b>Print Image</b>
+            </span>
+        </a>
+        <div class="navbar-collapse collapse mr-auto">
+            @if (Session["admin"] != null)
+            {
+                Member admin = (Member)Session["admin"];
+                <ul class="nav navbar-nav sign-in-out">
+                    <li class="nav-item">
+                        <a class="nav-link font-weight-bold" href="#">
+                            <i class="fa-unlock-alt" aria-hidden="true">Wellcome,<span style="color:aqua;">@admin.UserM</span> </i>
+                        </a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "Customers")"> Manage Customers Info</a></li>
+                    <li class="nav-item"><a class="nav-link text-white bg-danger" href='@Url.Action("LogOut","AdminLogin")'>Sign Out</a></li>
+                </ul>
 
-                }
-                else
-                {
-                    <ul class="nav navbar-nav sign-in-out">
-                        <li class="nav-item btn-success"><a href='@Url.Action("Index","AdminLogin")'>Admin Sign In</a></li>
-                    </ul>
-                }
-            </div>
+            }
+            else
+            {
+                <ul class="nav navbar-nav sign-in-out">
+                    <li class="nav-item"><a class="nav-link" href='@Url.Action("Index","AdminLogin")'>Admin Sign In</a></li>
+                </ul>
+            }
         </div>
     </div>
 
