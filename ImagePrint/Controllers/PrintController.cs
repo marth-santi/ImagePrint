@@ -30,6 +30,7 @@ namespace ImagePrint.Controllers
             {
                 db.Orders.Add(printViewModel.UserOrder);
                 db.SaveChanges();
+                printViewModel.UserOrder = db.Orders.SingleOrDefault(or => or.CusId == user.CusId);
             }
 
             // get list of images of user order
@@ -40,7 +41,7 @@ namespace ImagePrint.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult UploadImage([Bind(Include = "UploadedImage")] PrintViewModel model, HttpPostedFileBase uploadImg)
+        public ActionResult UploadImage([Bind(Include = "UploadedImage, UserOrder")] PrintViewModel model, HttpPostedFileBase uploadImg)
         {
             if (Session["user"] == null)
                 return RedirectToAction("Login", "LoginCustomer");
@@ -63,7 +64,6 @@ namespace ImagePrint.Controllers
             if (existImg == null)
                 db.Images.Add(image);
             db.SaveChanges();
-            ViewBag.Image = image;
 
             // save image to server
             string urlImage = Server.MapPath(image.ImageName);
@@ -72,6 +72,7 @@ namespace ImagePrint.Controllers
             // Update order detail (after having image ID auto generated)
             OrderDetail detail = new OrderDetail();
             detail.Image = image;
+            detail.OrderId = model.UserOrder.OrderId;
             db.OrderDetails.Add(detail);
             db.SaveChanges();
 
