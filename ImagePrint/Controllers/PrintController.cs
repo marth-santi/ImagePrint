@@ -1,5 +1,6 @@
 ﻿using ImagePrint.Models;
 using ImagePrint.Models.ViewModels;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 
 namespace ImagePrint.Controllers
@@ -43,7 +45,7 @@ namespace ImagePrint.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult UploadImage([Bind(Include = "UserOrder")] PrintViewModel model, HttpPostedFileBase uploadImg)
+        public ActionResult UploadImage(string model, HttpPostedFileBase uploadImg)
         {
             if (Session["user"] == null)
                 return RedirectToAction("Login", "LoginCustomer");
@@ -51,6 +53,8 @@ namespace ImagePrint.Controllers
 
             if (!ModelState.IsValid)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            var viewModel = JsonConvert.DeserializeObject<PrintViewModel>(model);
 
             if (uploadImg == null && uploadImg.ContentLength == 0)
             {
@@ -61,7 +65,7 @@ namespace ImagePrint.Controllers
             Image image = new Image();
             // Save image info to database
             image.ImageName = "~/Content/image/image_print/" + user.CusId + "/" + uploadImg.FileName;
-            var existImg = db.Images.SingleOrDefault(i => i.ImageName == image.ImageName);
+            var existImg = db.Images.FirstOrDefault(i => i.ImageName == image.ImageName);
             // Only add image if there is no same img path in database
             if (existImg == null)
                 image = db.Images.Add(image);
@@ -75,12 +79,12 @@ namespace ImagePrint.Controllers
             // Update order detail (after having image ID auto generated)
             OrderDetail detail = new OrderDetail();
             detail.Image = image;
-            detail.OrderId = model.UserOrder.OrderId;
+            detail.OrderId = viewModel.UserOrder.OrderId;
             detail.SizeId = DEFAULT_SIZE_ID;
             db.OrderDetails.Add(detail);
             db.SaveChanges();
 
-            return View(image);
+            return View("UploadImage", viewModel);
         }
     }
 }

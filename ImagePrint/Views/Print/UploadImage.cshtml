@@ -1,4 +1,5 @@
 ﻿@using ImagePrint.Models
+@using Newtonsoft.Json
 @model ImagePrint.Models.ViewModels.PrintViewModel
 @{
     ViewBag.Title = "UploadImage";
@@ -10,7 +11,7 @@
 }
 
 <h2>Upload Image</h2>
-<h2>@Html.DisplayFor(m => m.UserOrder.CusId)</h2>
+
 
 @using (Html.BeginForm("UploadImage", "Print", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
@@ -19,13 +20,11 @@
     <div>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.UserOrder.CusId)
-        @Html.HiddenFor(model => model.UserOrder.OrderId)
+        @Html.Hidden("model", JsonConvert.SerializeObject(Model))
         <div class="form-group">
             @Html.Label("Choose file upload")
             <div class="col-md-10">
-                @*@Html.EditorFor(model => model.ImageName, new { htmlAttributes = new { @class = "form-control" } })*@
-                <input class="btn btn-default" type="file" name="uploadImg" id="image" />
+                <input class="btn btn-light text-info" type="file" name="uploadImg" id="image" />
             </div>
         </div>
 
