@@ -3,6 +3,7 @@ using ImagePrint.Models.ViewModels;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -66,9 +67,20 @@ namespace ImagePrint.Controllers
             // Save image info to database
             image.ImageName = "~/Content/image/image_print/" + user.CusId + "/" + uploadImg.FileName;
             var existImg = db.Images.FirstOrDefault(i => i.ImageName == image.ImageName);
+
             // Only add image if there is no same img path in database
             if (existImg == null)
+            {
                 image = db.Images.Add(image);
+                // Update order detail (after having image ID auto generated)
+                OrderDetail detail = new OrderDetail();
+                detail.Image = image;
+                detail.OrderId = viewModel.UserOrder.OrderId;
+                detail.SizeId = DEFAULT_SIZE_ID;
+                db.OrderDetails.Add(detail);
+            }
+            else // If existed, set existed img as current working object
+                image = existImg;
             db.SaveChanges();
 
             // save image to server
@@ -76,12 +88,7 @@ namespace ImagePrint.Controllers
             Directory.CreateDirectory(Server.MapPath("~/Content/image/image_print/" + user.CusId));
             uploadImg.SaveAs(urlImage);
 
-            // Update order detail (after having image ID auto generated)
-            OrderDetail detail = new OrderDetail();
-            detail.Image = image;
-            detail.OrderId = viewModel.UserOrder.OrderId;
-            detail.SizeId = DEFAULT_SIZE_ID;
-            db.OrderDetails.Add(detail);
+            
             db.SaveChanges();
 
             return View("UploadImage", viewModel);
