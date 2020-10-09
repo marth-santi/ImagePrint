@@ -191,6 +191,24 @@
     <Content Include="Content\fontawesome-all.min.css" />
     <Content Include="Content\fontawesome.css" />
     <Content Include="Content\fontawesome.min.css" />
+    <Content Include="Content\fonts\lc_lightbox.svg" />
+    <Content Include="Content\image\1.jpg" />
+    <Content Include="Content\image\2.jpg" />
+    <Content Include="Content\image\3.jpg" />
+    <Content Include="Content\image\4.jpg" />
+    <Content Include="Content\image\5.jpg" />
+    <Content Include="Content\image\6.jpg" />
+    <Content Include="Content\image\7.jpg" />
+    <Content Include="Content\image\image_index\1.jpg" />
+    <Content Include="Content\image\image_index\2.jpg" />
+    <Content Include="Content\image\image_index\3.jpg" />
+    <Content Include="Content\image\image_index\4.jpg" />
+    <Content Include="Content\image\image_index\5.jpg" />
+    <Content Include="Content\image\image_index\6.jpg" />
+    <Content Include="Content\image\image_index\7.jpg" />
+    <Content Include="Content\image\image_index\8.jpg" />
+    <Content Include="Content\image\logo.jpg" />
+    <Content Include="Content\image\nen.jpg" />
     <Content Include="Content\LICENSE.txt" />
     <Content Include="Content\Custom\MainLayout.css" />
     <Content Include="Content\regular.css" />
@@ -273,6 +291,9 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Content\fonts\lc_lightbox.eot" />
+    <Content Include="Content\fonts\lc_lightbox.ttf" />
+    <Content Include="Content\fonts\lc_lightbox.woff" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -401,6 +422,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Content\image\image_print\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -2,13 +2,21 @@
     height: 100%;
 }
 
+@import url('https://fonts.googleapis.com/css?family=Numans');
 
+html, body {
+    background-image: url('http://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-family: 'Numans', sans-serif;
+}
 body {
     background-color: #C8ECF7;
     min-height: 100%;
     display: grid;
     grid-template-rows: 1fr auto;
     margin-top: 50px;
+    color: navajowhite;
 }
 
 
