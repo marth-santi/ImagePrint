@@ -2,6 +2,7 @@
 using ImagePrint.Models.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -28,9 +29,10 @@ namespace ImagePrint.Controllers
             // If user order not present, create new
             if (printViewModel.UserOrder == null)
             {
-                db.Orders.Add(printViewModel.UserOrder);
+                Order newOrder = new Order();
+                newOrder.CusId = user.CusId;
+                printViewModel.UserOrder = db.Orders.Add(newOrder);
                 db.SaveChanges();
-                printViewModel.UserOrder = db.Orders.SingleOrDefault(or => or.CusId == user.CusId);
             }
 
             // get list of images of user order
@@ -41,7 +43,7 @@ namespace ImagePrint.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult UploadImage([Bind(Include = "UploadedImage, UserOrder")] PrintViewModel model, HttpPostedFileBase uploadImg)
+        public ActionResult UploadImage([Bind(Include = "UserOrder")] PrintViewModel model, HttpPostedFileBase uploadImg)
         {
             if (Session["user"] == null)
                 return RedirectToAction("Login", "LoginCustomer");
@@ -56,23 +58,25 @@ namespace ImagePrint.Controllers
                 return View();
             }
 
-            Image image = model.UploadedImage;
+            Image image = new Image();
             // Save image info to database
             image.ImageName = "~/Content/image/image_print/" + user.CusId + "/" + uploadImg.FileName;
             var existImg = db.Images.SingleOrDefault(i => i.ImageName == image.ImageName);
             // Only add image if there is no same img path in database
             if (existImg == null)
-                db.Images.Add(image);
+                image = db.Images.Add(image);
             db.SaveChanges();
 
             // save image to server
             string urlImage = Server.MapPath(image.ImageName);
+            Directory.CreateDirectory(Server.MapPath("~/Content/image/image_print/" + user.CusId));
             uploadImg.SaveAs(urlImage);
 
             // Update order detail (after having image ID auto generated)
             OrderDetail detail = new OrderDetail();
             detail.Image = image;
             detail.OrderId = model.UserOrder.OrderId;
+            detail.SizeId = DEFAULT_SIZE_ID;
             db.OrderDetails.Add(detail);
             db.SaveChanges();
 

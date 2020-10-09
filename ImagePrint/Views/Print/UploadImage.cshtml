@@ -2,16 +2,6 @@
 @model ImagePrint.Models.ViewModels.PrintViewModel
 @{
     ViewBag.Title = "UploadImage";
-    Customer cus = (Customer)Session["user"];
-
-    Order order = (Order)ViewBag.Order;
-    if (order == null)
-    {
-        order = new Order();
-        order.CusId = cus.CusId;
-    }
-
-    var lstOrderDetails = (List<OrderDetail>)ViewBag.lstOrderDetail;
 }
 
 @if (ViewBag.Image != null)
@@ -20,7 +10,7 @@
 }
 
 <h2>Upload Image</h2>
-
+<h2>@Html.DisplayFor(m => m.UserOrder.CusId)</h2>
 
 @using (Html.BeginForm("UploadImage", "Print", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
@@ -29,7 +19,8 @@
     <div>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.OrderId)
+        @Html.HiddenFor(model => model.UserOrder.CusId)
+        @Html.HiddenFor(model => model.UserOrder.OrderId)
         <div class="form-group">
             @Html.Label("Choose file upload")
             <div class="col-md-10">
