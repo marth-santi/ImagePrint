@@ -88,9 +88,6 @@ namespace ImagePrint.Controllers
             Directory.CreateDirectory(Server.MapPath("~/Content/image/image_print/" + user.CusId));
             uploadImg.SaveAs(urlImage);
 
-            
-            db.SaveChanges();
-
             return View("UploadImage", viewModel);
         }
     }

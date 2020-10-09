@@ -431,7 +431,7 @@
     <Content Include="Views\LoginCustomer\Login.cshtml" />
     <Content Include="Views\LoginCustomer\SignUp.cshtml" />
     <Content Include="Views\Print\UploadImage.cshtml" />
-    <Content Include="Views\Print\_OrderDetails.cshtml" />
+    <Content Include="Views\Print\_OrderDetailsList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
