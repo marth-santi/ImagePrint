@@ -3,9 +3,9 @@
     ViewBag.Title = "Login";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@section css
+@section styles
 {
-    <link rel="stylesheet" type="text/css" href="~/Content/new.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/Custom/LoginCustomer.css">
 }
 <h2 id="text-login">Login to Print</h2>
 @using (Html.BeginForm("Login", "LoginCustomer"))
@@ -25,7 +25,7 @@
                 </div>
                 <div class="card-body align-items-center">
 
-                    <div class="form-horizontal">
+                    <div>
                         <div class="form-group">
                             <div class="input-group-prepend col-md-2">
                                 <span class="input-group-text"><i class="fas fa-user"></i></span>
@@ -47,7 +47,7 @@
                                 @Html.ValidationMessageFor(model => model.PassCus, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                        <div class="row align-items-center remember">
+                        <div class="form-check align-items-center remember">
                             <input type="checkbox">Remember Me
                         </div>
                     </div>
