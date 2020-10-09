@@ -17,7 +17,7 @@
         </button>
 
         <img src="~/Content/image/logo.jpg" class="icon-header" />
-        <a href='@Url.Action("Index","GoToPrint")'>
+        <a href='@Url.Action("UploadImage","Print")'>
             <span class="btn my-btn btn-xs btn-outline-success" style="color:aqua">
                 <i class="fa fa-upload" aria-hidden="true" style="font-size:25px; margin-top:7px;"></i>
                 <span class="navbar-brand">Go to print !</span>
@@ -35,7 +35,7 @@
                 
                 <ul class="nav navbar-nav sign-in-out ml-md-auto m-2">
                     <li class="btn btn-danger ml-2">
-                        <a class="nav-item" href='@Url.Action("LogOut","LoginCustomer")'>Sign Out</a>
+                        <a class="nav-item text-white text-decoration-none" href='@Url.Action("LogOut","LoginCustomer")'>Sign Out</a>
                     </li>
                     <li class="wellcome-text ml-2" style="color:aqua">
                         <i class="fa fa-unlock-alt" aria-hidden="true"></i>Wellcome, @cs.UserCus

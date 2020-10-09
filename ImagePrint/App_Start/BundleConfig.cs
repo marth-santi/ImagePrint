@@ -31,6 +31,7 @@ namespace ImagePrint
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
                       "~/Content/Custom/MainLayout.css",
+                      "~/Content/Custom/MainContent.css",
                       "~/Content/Custom/footer.css"
                 ));
 

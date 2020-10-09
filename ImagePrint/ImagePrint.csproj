@@ -137,6 +137,7 @@
     <Compile Include="Areas\Utility.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginCustomerController.cs" />
+    <Compile Include="Controllers\PrintController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -185,7 +186,7 @@
     <Content Include="Content\brands.css" />
     <Content Include="Content\brands.min.css" />
     <Content Include="Content\Custom\footer.css" />
-    <Content Include="Content\Custom\LoginCustomer.css" />
+    <Content Include="Content\Custom\MainContent.css" />
     <Content Include="Content\fontawesome-all.css" />
     <Content Include="Content\fontawesome-all.min.css" />
     <Content Include="Content\fontawesome.css" />
@@ -395,6 +396,7 @@
     <Content Include="webfonts\fa-brands-400.eot" />
     <Content Include="Views\LoginCustomer\Login.cshtml" />
     <Content Include="Views\LoginCustomer\SignUp.cshtml" />
+    <Content Include="Views\Print\UploadImage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

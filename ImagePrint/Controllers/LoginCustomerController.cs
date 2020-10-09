@@ -11,11 +11,6 @@ namespace ImagePrint.Controllers
     public class LoginCustomerController : Controller
     {
         private MyImageDBEntities db = new MyImageDBEntities();
-        // GET: LoginCustomer
-        public ActionResult Index()
-        {
-            return View();
-        }
         public ActionResult SignUp()
         {
             return View();
@@ -42,7 +37,7 @@ namespace ImagePrint.Controllers
             if (rs != null)
             {
                 Session["user"] = rs;
-                return RedirectToAction("Index", "GoToPrint");
+                return RedirectToAction("UploadImage", "Print");
             }
             else
             {
