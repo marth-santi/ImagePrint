@@ -119,5 +119,17 @@ namespace ImagePrint.Controllers
 
             return printViewModel;
         }
+
+        public ActionResult DeleteImage(string orderId, string imageId)
+        {
+            if (Session["user"] == null)
+                return RedirectToAction("Login", "LoginCustomer");
+            var user = (Customer)Session["user"];
+
+            if (!ModelState.IsValid)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            return View("UploadImage", UpdateViewModel(user));
+        }
     }
 }
