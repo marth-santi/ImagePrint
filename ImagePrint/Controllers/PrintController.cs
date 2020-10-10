@@ -43,10 +43,10 @@ namespace ImagePrint.Controllers
 
             var viewModel = JsonConvert.DeserializeObject<PrintViewModel>(model);
 
-            if (uploadImg == null && uploadImg.ContentLength == 0)
+            if (uploadImg == null || uploadImg.ContentLength == 0)
             {
-                ViewBag["Error"] = "Error uploading file";
-                return View();
+                ViewBag.Error = "Error uploading file";
+                return View(UpdateViewModel(user));
             }
 
             Image image = new Image();
@@ -121,7 +121,7 @@ namespace ImagePrint.Controllers
         }
 
         [HttpPost]
-        public ActionResult DeleteImage(string orderId, string imageId)
+        public ActionResult DeleteImage(int orderId, int imageId)
         {
             if (Session["user"] == null)
                 return RedirectToAction("Login", "LoginCustomer");
@@ -130,11 +130,29 @@ namespace ImagePrint.Controllers
             if (!ModelState.IsValid)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            var printViewModel = new PrintViewModel();
-            // find order with user ID
-            printViewModel.UserOrder = db.Orders.Where(ord => ord.CusId == user.CusId).FirstOrDefault();
+            var selectedOrderDetail = db.OrderDetails.FirstOrDefault(o => o.OrderId == orderId && o.ImageId == imageId);
+            var selectedImg = db.Images.Find(imageId);
+            // If cannot find img / order detail => return to view
+            if (selectedImg == null || selectedOrderDetail == null)
+                return View("UploadImage", UpdateViewModel(user));
 
-            return View("UploadImage", UpdateViewModel(user));
+            var filePath = Server.MapPath(selectedImg.ImageName);
+            try
+            {
+                if (System.IO.File.Exists(filePath))
+                    System.IO.File.Delete(filePath);
+
+                db.OrderDetails.Remove(selectedOrderDetail);
+                db.Images.Remove(selectedImg);
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                ViewBag.Error = e.Message;
+            }
+            ModelState.Clear();
+
+            return RedirectToAction("UploadImage","Print");
         }
     }
 }

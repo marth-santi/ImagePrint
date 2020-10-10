@@ -1,5 +1,10 @@
 ﻿@using ImagePrint.Models.ViewModels
 @model List<ImagePrint.Models.ViewModels.ImageDetail>
+
+<div>
+    @ViewBag.Error
+</div>
+
 @using (Html.BeginForm("SetImageDetails","Print", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
@@ -20,7 +25,9 @@
                                    orderId = Model[i].OrderDetail.OrderId,
                                    imageId = Model[i].OrderDetail.ImageId
                                }, 
-                               new AjaxOptions() { HttpMethod = "POST"}, 
+                               new AjaxOptions() { 
+                                   HttpMethod = "POST"
+                               }, 
                                htmlAttributes: new { @class = "btn btn-danger text-white text-decoration-none" })
                         </div>
                         <div class="form-group row">

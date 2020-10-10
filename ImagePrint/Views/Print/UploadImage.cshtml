@@ -12,6 +12,9 @@
 
 <h2>Upload Image</h2>
 
+<div class="text-danger">
+    @ViewBag.Error
+</div>
 
 @using (Html.BeginForm("UploadImage", "Print", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
@@ -38,4 +41,7 @@
     </div>
 }
 
-@Html.Partial("_OrderDetailsList", Model.ImageDetailList)
+@if (Model.ImageDetailList != null && Model.ImageDetailList.Count > 0)
+{
+    @Html.Partial("_OrderDetailsList", Model.ImageDetailList)
+}
