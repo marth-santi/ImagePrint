@@ -120,6 +120,7 @@ namespace ImagePrint.Controllers
             return printViewModel;
         }
 
+        [HttpPost]
         public ActionResult DeleteImage(string orderId, string imageId)
         {
             if (Session["user"] == null)
@@ -128,6 +129,10 @@ namespace ImagePrint.Controllers
 
             if (!ModelState.IsValid)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            var printViewModel = new PrintViewModel();
+            // find order with user ID
+            printViewModel.UserOrder = db.Orders.Where(ord => ord.CusId == user.CusId).FirstOrDefault();
 
             return View("UploadImage", UpdateViewModel(user));
         }

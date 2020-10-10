@@ -15,10 +15,13 @@
                             @Html.Label(Path.GetFileNameWithoutExtension(Model[i].Image.ImageName))
                         </div>
                         <div class="form-group">
-                            <a href="@Url.Action("DeleteImage","Print", new { 
-                                    orderId = Model[i].OrderDetail.OrderId, imageId = Model[i].OrderDetail.ImageId
-                                })" 
-                               class="btn btn-danger text-white text-decoration-none">Delete</a>
+                            @Ajax.ActionLink("Delete AJAX", "DeleteImage", "Print", 
+                               new {
+                                   orderId = Model[i].OrderDetail.OrderId,
+                                   imageId = Model[i].OrderDetail.ImageId
+                               }, 
+                               new AjaxOptions() { HttpMethod = "POST"}, 
+                               htmlAttributes: new { @class = "btn btn-danger text-white text-decoration-none" })
                         </div>
                         <div class="form-group row">
                             @Html.Label("Choose Size", htmlAttributes: new { @class = "control-label col" })
