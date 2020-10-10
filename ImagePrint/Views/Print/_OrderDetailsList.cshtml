@@ -5,13 +5,22 @@
     @Html.AntiForgeryToken()
 
     <div class="row">
-        @foreach (ImageDetail imgDetail in Model)
+        @for (int i = 0; i < Model.Count(); i++)
         {
             <div class="col-md-6 col-lg-4">
                 <div class="card">
-                    <img src="@Url.Content(imgDetail.Image.ImageName)" alt="Image" class="card-img-top img-thumbnail" style="max-width:100%" />
+                    <img src="@Url.Content(Model[i].Image.ImageName)" alt="Image" class="card-img-top img-thumbnail" style="max-width:100%" />
                     <div class="card-body">
-                        @imgDetail.OrderDetail.OrderId
+                        <div class="form-group">
+                            @Html.Label(Path.GetFileNameWithoutExtension(Model[i].Image.ImageName))
+                        </div>
+                        <div class="form-group row">
+                            @Html.Label("Choose Size", htmlAttributes: new { @class = "control-label col" })
+                            <div class="col">
+                                @Html.DropDownListFor(model => model[i].Size.Size1, (List<SelectListItem>)ViewBag.SizeList, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model[i].Size, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

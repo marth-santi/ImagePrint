@@ -45,6 +45,9 @@ namespace ImagePrint.Controllers
                     OrderDetail = od, Image = od.Image, Size = od.Size
                 }).ToList();
 
+            // get size list
+            ViewBag.SizeList = GetSizeList();
+
             return View(printViewModel);
         }
 
@@ -93,6 +96,18 @@ namespace ImagePrint.Controllers
             uploadImg.SaveAs(urlImage);
 
             return View("UploadImage", viewModel);
+        }
+
+        public List<SelectListItem> GetSizeList()
+        {
+            var sizeList = db.Sizes.Select(
+                    s => new SelectListItem
+                    {
+                        Value = s.Size1,
+                        Text = s.Size1
+                    }
+                ).ToList();
+            return sizeList;
         }
     }
 }

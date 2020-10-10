@@ -22,7 +22,7 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.Hidden("model", JsonConvert.SerializeObject(Model))
         <div class="form-group">
-            @Html.Label("Choose file upload")
+            @Html.Label("Choose image to upload")
             <div class="col-md-10">
                 <input class="btn btn-light text-info" type="file" name="uploadImg" id="image" />
             </div>
