@@ -186,6 +186,7 @@
     <Compile Include="Models\Size.cs">
       <DependentUpon>MyImageDbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewModels\ImageDetail.cs" />
     <Compile Include="Models\ViewModels\PrintViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

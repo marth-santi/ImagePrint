@@ -38,8 +38,12 @@ namespace ImagePrint.Controllers
                 db.SaveChanges();
             }
 
-            // get list of images of user order
-            printViewModel.OrderDetailList = db.OrderDetails.Where(orderDetail => orderDetail.OrderId == printViewModel.UserOrder.OrderId).ToList();
+            // get list of order details and images of user order
+            printViewModel.ImageDetailList = db.OrderDetails.Where(orderDetail => orderDetail.OrderId == printViewModel.UserOrder.OrderId)
+                .Select(od => new ImageDetail 
+                { 
+                    OrderDetail = od, Image = od.Image, Size = od.Size
+                }).ToList();
 
             return View(printViewModel);
         }

@@ -9,6 +9,6 @@ namespace ImagePrint.Models.ViewModels
     {
         public Order UserOrder { get; set; }
         public OrderDetail UploadedDetail { get; set; }
-        public List<OrderDetail> OrderDetailList { get; set; }
+        public List<ImageDetail> ImageDetailList { get; set; }
     }
 }
