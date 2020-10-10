@@ -1,12 +1,22 @@
 ﻿@using ImagePrint.Models.ViewModels
 @model List<ImagePrint.Models.ViewModels.ImageDetail>
-@using (Html.BeginForm("SetImageDetails","Print", FormMethod.Post))
+@using (Html.BeginForm("SetImageDetails", "Print", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
+    @Html.Label("Provide details for each image and confirm")
+    <br />
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Confirm and Go to Payment" class="btn btn-success" />
+        </div>
+    </div>    
+    <br />
     <div class="row">
         @for (int i = 0; i < Model.Count(); i++)
         {
+            Html.HiddenFor(model => model[i].OrderDetail.OrderId);
+            Html.HiddenFor(model => model[i].OrderDetail.ImageId);
             <div class="col-md-6 col-lg-4">
                 <div class="card">
                     <img src="@Url.Content(Model[i].Image.ImageName)" alt="Image" class="card-img-top img-thumbnail" style="max-width:100%" />
@@ -15,21 +25,28 @@
                             @Html.Label(Path.GetFileNameWithoutExtension(Model[i].Image.ImageName))
                         </div>
                         <div class="form-group">
-                            <a href="@Url.Action("DeleteImage","Print", new { 
-                                    orderId = Model[i].OrderDetail.OrderId, imageId = Model[i].OrderDetail.ImageId
-                                })" 
+                            <a href="@Url.Action("DeleteImage","Print", new {
+                                orderId = Model[i].OrderDetail.OrderId, imageId = Model[i].OrderDetail.ImageId
+                            })"
                                class="btn btn-danger text-white text-decoration-none">Delete</a>
                         </div>
                         <div class="form-group row">
                             @Html.Label("Choose Size", htmlAttributes: new { @class = "control-label col" })
                             <div class="col">
-                                @Html.DropDownListFor(model => model[i].Size.Size1, (List<SelectListItem>)ViewBag.SizeList, new { @class = "form-control" })
+                                @Html.DropDownListFor(model => model[i].OrderDetail.SizeId, (List<SelectListItem>)ViewBag.SizeList, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model[i].Size, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            @Html.Label("Select number of prints", htmlAttributes: new { @class = "control-label col" })
+                            <div class="col">
+                                @Html.EditorFor(model => model[i].OrderDetail.NumberOfPrints, new { HtmlAttributes = new { @type = "number", @min = "0", @step = "1", @value = "0", @class = "form-control"} })
+                                @Html.ValidationMessageFor(model => model[i].OrderDetail.NumberOfPrints, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         }
-    </div> 
+    </div>
 }

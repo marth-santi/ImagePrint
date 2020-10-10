@@ -64,10 +64,10 @@ namespace ImagePrint.Controllers
                 detail.OrderId = viewModel.UserOrder.OrderId;
                 detail.SizeId = DEFAULT_SIZE_ID;
                 db.OrderDetails.Add(detail);
+                db.SaveChanges();
             }
             else // If existed, set existed img as current working object
                 image = existImg;
-            db.SaveChanges();
 
             // save image to server
             string urlImage = Server.MapPath(image.ImageName);
@@ -83,7 +83,7 @@ namespace ImagePrint.Controllers
             var sizeList = db.Sizes.Select(
                     s => new SelectListItem
                     {
-                        Value = s.Size1,
+                        Value = s.SizeId.ToString(),
                         Text = "Size: " + s.Size1 + ", Price: " + s.Price
                     }
                 ).ToList();
@@ -152,6 +152,13 @@ namespace ImagePrint.Controllers
             ModelState.Clear();
 
             return RedirectToAction("UploadImage","Print");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SetImageDetails(IEnumerable<OrderDetail> model)
+        {
+            return View("UploadImage");
         }
     }
 }

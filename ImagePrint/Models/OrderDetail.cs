@@ -11,7 +11,8 @@ namespace ImagePrint.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class OrderDetail
     {
         public int OrderId { get; set; }
