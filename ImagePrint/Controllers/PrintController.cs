@@ -133,7 +133,7 @@ namespace ImagePrint.Controllers
             var selectedImg = db.Images.Find(imageId);
             // If cannot find img / order detail => return to view
             if (selectedImg == null || selectedOrderDetail == null)
-                return View("UploadImage", UpdateViewModel(user));
+                return RedirectToAction("UploadImage", "Print");
 
             var filePath = Server.MapPath(selectedImg.ImageName);
             try
@@ -156,9 +156,16 @@ namespace ImagePrint.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SetImageDetails(IEnumerable<ImageDetail> model)
+        public ActionResult SetImageDetails(IEnumerable<ImageDetail> imageDetails)
         {
-            return View("UploadImage");
+            foreach (ImageDetail imgDetail in imageDetails)
+            {
+                var orderDetail = db.OrderDetails.FirstOrDefault(od =>  od.OrderId == imgDetail.OrderDetail.OrderId && od.ImageId == imgDetail.OrderDetail.ImageId);
+                orderDetail.NumberOfPrints = imgDetail.OrderDetail.NumberOfPrints;
+                orderDetail.SizeId = imgDetail.OrderDetail.SizeId;
+                db.SaveChanges();
+            }
+            return RedirectToAction("UploadImage", "Print");
         }
     }
 }
