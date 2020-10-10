@@ -1,10 +1,5 @@
 ﻿@using ImagePrint.Models.ViewModels
 @model List<ImagePrint.Models.ViewModels.ImageDetail>
-
-<div>
-    @ViewBag.Error
-</div>
-
 @using (Html.BeginForm("SetImageDetails","Print", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
@@ -20,15 +15,10 @@
                             @Html.Label(Path.GetFileNameWithoutExtension(Model[i].Image.ImageName))
                         </div>
                         <div class="form-group">
-                            @Ajax.ActionLink("Delete AJAX", "DeleteImage", "Print", 
-                               new {
-                                   orderId = Model[i].OrderDetail.OrderId,
-                                   imageId = Model[i].OrderDetail.ImageId
-                               }, 
-                               new AjaxOptions() { 
-                                   HttpMethod = "POST"
-                               }, 
-                               htmlAttributes: new { @class = "btn btn-danger text-white text-decoration-none" })
+                            <a href="@Url.Action("DeleteImage","Print", new { 
+                                    orderId = Model[i].OrderDetail.OrderId, imageId = Model[i].OrderDetail.ImageId
+                                })" 
+                               class="btn btn-danger text-white text-decoration-none">Delete</a>
                         </div>
                         <div class="form-group row">
                             @Html.Label("Choose Size", htmlAttributes: new { @class = "control-label col" })

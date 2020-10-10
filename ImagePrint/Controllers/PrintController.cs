@@ -120,7 +120,6 @@ namespace ImagePrint.Controllers
             return printViewModel;
         }
 
-        [HttpPost]
         public ActionResult DeleteImage(int orderId, int imageId)
         {
             if (Session["user"] == null)
