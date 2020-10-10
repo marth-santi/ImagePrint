@@ -25,28 +25,7 @@ namespace ImagePrint.Controllers
                 return RedirectToAction("Login", "LoginCustomer");
             var user = (Customer)Session["user"];
 
-            var printViewModel = new PrintViewModel();
-            // find order with user ID
-            printViewModel.UserOrder = db.Orders.Where(ord => ord.CusId == user.CusId).FirstOrDefault();
-
-            // If user order not present, create new
-            if (printViewModel.UserOrder == null)
-            {
-                Order newOrder = new Order();
-                newOrder.CusId = user.CusId;
-                printViewModel.UserOrder = db.Orders.Add(newOrder);
-                db.SaveChanges();
-            }
-
-            // get list of order details and images of user order
-            printViewModel.ImageDetailList = db.OrderDetails.Where(orderDetail => orderDetail.OrderId == printViewModel.UserOrder.OrderId)
-                .Select(od => new ImageDetail 
-                { 
-                    OrderDetail = od, Image = od.Image, Size = od.Size
-                }).ToList();
-
-            // get size list
-            ViewBag.SizeList = GetSizeList();
+            var printViewModel = UpdateViewModel(user);
 
             return View(printViewModel);
         }
@@ -94,8 +73,9 @@ namespace ImagePrint.Controllers
             string urlImage = Server.MapPath(image.ImageName);
             Directory.CreateDirectory(Server.MapPath("~/Content/image/image_print/" + user.CusId));
             uploadImg.SaveAs(urlImage);
-
-            return View("UploadImage", viewModel);
+            
+            // Return view with updated view model
+            return View("UploadImage", UpdateViewModel(user));
         }
 
         public List<SelectListItem> GetSizeList()
@@ -104,10 +84,40 @@ namespace ImagePrint.Controllers
                     s => new SelectListItem
                     {
                         Value = s.Size1,
-                        Text = s.Size1
+                        Text = "Size: " + s.Size1 + ", Price: " + s.Price
                     }
                 ).ToList();
             return sizeList;
+        }
+
+        public PrintViewModel UpdateViewModel(Customer user)
+        {
+            var printViewModel = new PrintViewModel();
+            // find order with user ID
+            printViewModel.UserOrder = db.Orders.Where(ord => ord.CusId == user.CusId).FirstOrDefault();
+
+            // If user order not present, create new
+            if (printViewModel.UserOrder == null)
+            {
+                Order newOrder = new Order();
+                newOrder.CusId = user.CusId;
+                printViewModel.UserOrder = db.Orders.Add(newOrder);
+                db.SaveChanges();
+            }
+
+            // get list of order details and images of user order
+            printViewModel.ImageDetailList = db.OrderDetails.Where(orderDetail => orderDetail.OrderId == printViewModel.UserOrder.OrderId)
+                .Select(od => new ImageDetail
+                {
+                    OrderDetail = od,
+                    Image = od.Image,
+                    Size = od.Size
+                }).ToList();
+
+            // get size list
+            ViewBag.SizeList = GetSizeList();
+
+            return printViewModel;
         }
     }
 }
