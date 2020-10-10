@@ -156,7 +156,7 @@ namespace ImagePrint.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SetImageDetails(IEnumerable<OrderDetail> model)
+        public ActionResult SetImageDetails(IEnumerable<ImageDetail> model)
         {
             return View("UploadImage");
         }
