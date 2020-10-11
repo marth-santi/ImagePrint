@@ -104,7 +104,11 @@ namespace ImagePrint.Controllers
                 newOrder.IsComplete = false;
                 printViewModel.UserOrder = db.Orders.Add(newOrder);
                 db.SaveChanges();
+
             }
+
+            // Set this order as current order
+            Session["order"] = printViewModel.UserOrder;
 
             // get list of order details and images of user order
             printViewModel.ImageDetailList = db.OrderDetails.Where(orderDetail => orderDetail.OrderId == printViewModel.UserOrder.OrderId)
@@ -169,7 +173,7 @@ namespace ImagePrint.Controllers
                 cost = cost + (orderDetail.NumberOfPrints * orderDetail.Size.Price.GetValueOrDefault());
             }
 
-            Session["Cost"] = cost;
+            Session["cost"] = cost;
             return RedirectToAction("CardDetails", "Payment");
         }
     }

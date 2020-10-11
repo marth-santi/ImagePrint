@@ -16,6 +16,10 @@
     @ViewBag.Error
 </div>
 
+<div class="text-success">
+    @TempData["status"]
+</div>
+
 @using (Html.BeginForm("UploadImage", "Print", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
