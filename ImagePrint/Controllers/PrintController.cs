@@ -159,13 +159,17 @@ namespace ImagePrint.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SetImageDetails(IEnumerable<ImageDetail> imageDetails)
         {
+            decimal cost = 0;
             foreach (ImageDetail imgDetail in imageDetails)
             {
                 var orderDetail = db.OrderDetails.FirstOrDefault(od =>  od.OrderId == imgDetail.OrderDetail.OrderId && od.ImageId == imgDetail.OrderDetail.ImageId);
                 orderDetail.NumberOfPrints = imgDetail.OrderDetail.NumberOfPrints;
                 orderDetail.SizeId = imgDetail.OrderDetail.SizeId;
                 db.SaveChanges();
+                cost = cost + (orderDetail.NumberOfPrints * orderDetail.Size.Price.GetValueOrDefault());
             }
+
+            Session["Cost"] = cost;
             return RedirectToAction("CardDetails", "Payment");
         }
     }
