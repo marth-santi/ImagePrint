@@ -93,14 +93,15 @@ namespace ImagePrint.Controllers
         public PrintViewModel UpdateViewModel(Customer user)
         {
             var printViewModel = new PrintViewModel();
-            // find order with user ID
-            printViewModel.UserOrder = db.Orders.Where(ord => ord.CusId == user.CusId).FirstOrDefault();
+            // find order with user ID and not complete (payment)
+            printViewModel.UserOrder = db.Orders.Where(ord => ord.CusId == user.CusId && !ord.IsComplete).FirstOrDefault();
 
             // If user order not present, create new
             if (printViewModel.UserOrder == null)
             {
                 Order newOrder = new Order();
                 newOrder.CusId = user.CusId;
+                newOrder.IsComplete = false;
                 printViewModel.UserOrder = db.Orders.Add(newOrder);
                 db.SaveChanges();
             }
@@ -165,7 +166,7 @@ namespace ImagePrint.Controllers
                 orderDetail.SizeId = imgDetail.OrderDetail.SizeId;
                 db.SaveChanges();
             }
-            return RedirectToAction("UploadImage", "Print");
+            return RedirectToAction("CardDetails", "Payment");
         }
     }
 }

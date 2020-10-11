@@ -25,6 +25,7 @@ namespace ImagePrint.Models
         public string FolderImage { get; set; }
         public string Email_Id { get; set; }
         public Nullable<decimal> CreditCardNumber { get; set; }
+        public bool IsComplete { get; set; }
     
         public virtual Customer Customer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

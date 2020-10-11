@@ -149,6 +149,7 @@
     <Compile Include="Areas\Utility.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginCustomerController.cs" />
+    <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Controllers\PrintController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -435,6 +436,7 @@
     <Content Include="Views\LoginCustomer\SignUp.cshtml" />
     <Content Include="Views\Print\UploadImage.cshtml" />
     <Content Include="Views\Print\_OrderDetailsList.cshtml" />
+    <Content Include="Views\Payment\CardDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
