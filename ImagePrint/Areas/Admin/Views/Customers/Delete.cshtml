@@ -10,7 +10,7 @@
 <div>
     <h4>Customer</h4>
     <hr />
-    <dl class="dl-horizontal">
+    <dl class="card dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.F_name)
         </dt>
@@ -82,7 +82,7 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
+            <input type="submit" value="Delete" class="btn btn-outline-danger" /> |
             @Html.ActionLink("Back to List", "Index")
         </div>
     }

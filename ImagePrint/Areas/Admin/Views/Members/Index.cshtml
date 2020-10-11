@@ -7,9 +7,9 @@
 <h2>List of admin accounts</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-info p-4" })
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-info m-2" })
 </p>
-<table class="table" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); padding:20px; color: white;">
+<table class="table card" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); padding:20px; color: white;">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.UserM)
@@ -30,8 +30,8 @@
                 @Html.DisplayFor(modelItem => item.PassM)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-success p-4" })
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger p-4" })
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-success m-2" })
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger m-2" })
             </td>
         </tr>
     }

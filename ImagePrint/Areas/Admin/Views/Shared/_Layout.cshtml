@@ -14,12 +14,12 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <a href='@Url.Action("Index","Home", new { area = "" })'>
-            <span class="btn-xs btn-primary navbar-brand">
+            <span class="btn my-btn btn-xs btn-outline-primary">
                 <b>To Homepage !</b>
             </span>
         </a>
         <a href='@Url.Action("Login","LoginCustomer", new { area = "" })'>
-            <span class="btn-xs btn-info navbar-brand">
+            <span class="btn my-btn btn-xs btn-outline-info">
                 <b>Print Image</b>
             </span>
         </a>
@@ -27,20 +27,20 @@
             @if (Session["admin"] != null)
             {
                 Member admin = (Member)Session["admin"];
-                <ul class="nav navbar-nav sign-in-out">
+                <ul class="nav navbar-nav sign-in-out ml-md-auto m-2">
                     <li class="nav-item">
                         <a class="nav-link font-weight-bold" href="#">
                             <i class="fa-unlock-alt" aria-hidden="true">Wellcome,<span style="color:aqua;">@admin.UserM</span> </i>
                         </a>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "Customers")"> Manage Customers Info</a></li>
-                    <li class="nav-item"><a class="nav-link text-white bg-danger" href='@Url.Action("LogOut","AdminLogin")'>Sign Out</a></li>
+                    <li class="nav-item"><a class="nav-link text-white bg-danger text-decoration-none" href='@Url.Action("LogOut","AdminLogin")'>Sign Out</a></li>
                 </ul>
 
             }
             else
             {
-                <ul class="nav navbar-nav sign-in-out">
+                <ul class="nav navbar-nav sign-in-out ml-md-auto m-2">
                     <li class="nav-item"><a class="nav-link" href='@Url.Action("Index","AdminLogin")'>Admin Sign In</a></li>
                 </ul>
             }
