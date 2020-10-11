@@ -65,7 +65,7 @@ namespace ImagePrint.Controllers
             }
             catch (Exception e)
             {
-                TempData["Error"] = e.Message;
+                TempData["error"] = e.Message;
                 return false;
             }
         }
